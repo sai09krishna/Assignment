@@ -1,0 +1,47 @@
+<div class="fluid-container">
+    <div class="header">
+        <ul>
+            <li>All Items</li>
+            <li><span *ngIf="show"> {{cartItemName}} Added To Cart</span></li>
+        </ul>
+    </div>	
+    <div class="fluid-container">
+        <div class="content">
+            <div class="content-body" *ngFor="let item of data">
+                <div class="content-image">
+                    <img [src]=item.image alt="Image">
+                </div>
+                <div class="content-footer">
+                    <p>{{ item.name }}</p>
+                    <p> <span>{{item.price.display | currency}}</span> <span> {{item.price.actual | currency}} </span> <button (click)="addToCart(item)" >Add To Cart</button> </p>
+                </div>
+            </div>
+        </div>
+        <div class="cart-content" *ngIf="showCartData">
+            <div class="cart-content-body">
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr *ngFor="let data of cartItems">
+                        <td> {{data.name}} </td>
+                        <td> {{data.total}} </td>
+                        <td> {{data.total * data.price.display  | currency}} </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="total-price">
+                <table>
+                    <tr><th>Total</th><th></th></tr>
+                    <tr> <td>Item( {{cartSize}} )</td> <td>{{cartActualPrice | currency}}</td> </tr>
+                    <tr><td>Discount</td><td>{{cartActualPrice - cartDiscountPrice | currency}}</td></tr>
+                    <tr><td>OrderTotal</td> <td> {{itemsPrice |currency}}</td></tr>
+                </table>
+                <button (click)="RemoveCart()" >Clear Cart</button>
+            </div>
+        </div>
+
+    </div>
+</div>
